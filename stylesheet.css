@@ -28,8 +28,17 @@ button {
 }
 #inputTime {
     background-color: turquoise;
+    width: fit-content;
+    text-align: center;
+    padding: 5px;
+    
 }
 
 input::placeholder {
     color: black;
+    width: fit-content;
+    
+    
+
+    
 }

@@ -3,6 +3,7 @@ let minutes = 0;
 let seconds = 0;
 let inputTime = 0;
 let currentTime = 0;
+let remainingTime = 0;
 
 const timerDisplay = document.querySelector('.timer');
 const startBtn = document.getElementById('startbtn');
@@ -17,18 +18,29 @@ resetBtn.addEventListener('click', resetTimer);
 addThirty.addEventListener('click', thirtyMinutes);
 
 function startTimer() {
-    if (!timerInterval && inputField.value.trim() !== '') {
+    if (!timerInterval && inputField.value.trim() !== '' || remainingTime > 0) {
+        if (remainingTime > 0) {
+            currentTime = remainingTime;
+            remainingTime = 0;
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            
+        } else {
         inputTime = parseInt(inputField.value.trim(), 10) * 60;
         currentTime = inputTime;
         timerInterval = setInterval(updateTimer, 1000);
-    }
+        }
+    } 
 }
 
 function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
+    remainingTime = currentTime;
 }
 function resetTimer() { 
+    clearInterval(timerInterval);
+    timerInterval = null;
     timerDisplay.textContent = "Input a new time to get started!";
 } 
 function thirtyMinutes() {

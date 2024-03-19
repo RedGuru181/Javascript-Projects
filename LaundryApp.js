@@ -1,7 +1,5 @@
-let timerInterval;
-let minutes = 0;
-let seconds = 0;
-let inputTime = 0;
+let timerInterval;//returns interval ID returned by 'setInterval()'
+let inputTime = 0;//
 let currentTime = 0;
 let remainingTime = 0;
 
@@ -18,30 +16,28 @@ resetBtn.addEventListener('click', resetTimer);
 addThirty.addEventListener('click', thirtyMinutes);
 
 function startTimer() {
-    if (!timerInterval && inputField.value.trim() !== '' || remainingTime > 0) {
+    if (!timerInterval && (inputField.value.trim() !== '' || remainingTime > 0)) {
         if (remainingTime > 0) {
+            // Resume timer from remaining time
             currentTime = remainingTime;
-            remainingTime = 0;
-            timerInterval = setInterval(updateTimer, 1000);
-            
-            
+            remainingTime = 0; // Reset remaining time
         } else {
-        inputTime = parseInt(inputField.value.trim(), 10) * 60;
-        currentTime = inputTime;
-        timerInterval = setInterval(updateTimer, 1000);
+            inputTime = parseInt(inputField.value.trim(), 10) * 60;
+            currentTime = inputTime;
         }
-    } 
+        timerInterval = setInterval(updateTimer, 1000);
+    }
 }
 
 function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
-    remainingTime = currentTime;
+    remainingTime = currentTime; //Store remaining time
 }
 function resetTimer() { 
-    clearInterval(timerInterval);
-    timerInterval = null;
+    stopTimer();
     timerDisplay.textContent = "Input a new time to get started!";
+    remainingTime = 0; //reset reamining time
 } 
 function thirtyMinutes() {
     currentTime += 30 * 60;

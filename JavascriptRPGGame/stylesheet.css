@@ -14,8 +14,19 @@ body {
     border-radius: 5px;
 }
 
+.status {
+    min-height: 75px;
+}
+
 .status p {
     margin: 0;
+}
+
+.status button {
+    margin-right: 2px;
+    margin-top: 5px;
+    background-color: hsl(28, 100%, 20%);
+
 }
 
 .description {
@@ -25,4 +36,25 @@ body {
     border: 1px solid hsl(58, 100%, 50%);
     border-radius: 5px;
     min-height: 100px;
+}
+
+#playerNameInput {
+    color: hsl(58, 100%, 50%);
+    background-color: hsl(0, 0%, 0%);
+    border-color: hsl(58, 100%, 50%);
+    border-radius: 5px;
+}
+
+#submitName {
+    background-color: hsl(108, 93%, 11%);
+    color: hsl(58, 100%, 50%);
+    border-color: hsl(58, 100%, 50%);
+    border-radius: 3px;
+}
+#playerNameInput::placeholder {
+    color: hsl(58, 100%, 50%);
+}
+
+button {
+    font-family: Arial, sans-serif;
 }

@@ -7,18 +7,15 @@
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-    <div class="status">
+    <div class="status" id="statusbar">
         <p>Health: <span id="health">100</span></p>
         <p>Gold: <span id="gold">50</span></p>
+        <button id="bagbtn" onclick="openBag()">Bag</button>
     </div>
     <div class="description" id="descriptionContainer">
-        <p id="description">Welcome Adventurer! What is your name?</p>
-        <input type="text" id="playerNameInput">
-        <button onclick="submitName()">Submit</button>
-        
-        
-
-
+        <p id="description">Adventurer! What is your name?</p>
+        <input type="text" id="playerNameInput" placeholder="Type your name here:">
+        <button id="submitName"  onclick="submitName()">Submit</button>
     </div>
     <script src="AdventureRPG.js"></script>
 </body>

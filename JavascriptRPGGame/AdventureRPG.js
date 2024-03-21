@@ -66,17 +66,23 @@ function displayInventory() {
     });
 }
 
-
+//Close bag function
+function closeBag() {
+    const statusBar = document.getElementById("statusbar");
+    statusBar.textContent = ''; // Clear the status bar
+    updateStatus(); // Update the status (health and gold)
+    document.getElementById('bagbtn').textContent = "Bag"; // Set button text to "Bag"
+    document.getElementById('bagbtn').onclick = openBag; // Set button onclick to openBag
+}
 //Open bag function
 function openBag() {
-    updateDescription("You open your bag and take a peak inside.");
-    displayInventory();
-
-    const bagButton = document.getElementById("bagbtn");
-    bagButton.textContent = "Close bag";
-    bagButton.onclick = closeBag();
-}
-
+        updateDescription("You open your bag and take a peek inside.");
+        displayInventory();
+        const bagButton = document.getElementById('bagbtn');
+        bagButton.textContent = "Close Bag"; // Set button text to "Close Bag"
+        bagButton.onclick = closeBag; // Set button onclick to closeBag
+    }
+    
 //Update initial status
 updateStatus();
 

@@ -41,9 +41,13 @@ function updateStatus() {
     document.getElementById('gold').textContent = gold;
 }
 
+let previousDescription =  '';
+let currentDescription = '';
 //Update description
 function updateDescription(description) {
-    document.getElementById('description').textContent = description;
+    currentDescription = description;
+    const descriptionElement = document.getElementById('description');
+    descriptionElement.textContent = currentDescription;
 }
 
 //Submit player name
@@ -52,36 +56,45 @@ function submitName() {
     document.getElementById('playerNameInput').style.display = 'none';
     document.getElementById('descriptionContainer').removeChild(document.getElementById('playerNameInput'));
     document.getElementById('descriptionContainer').removeChild(document.getElementById('submitName'));
-    updateDescription('Welcome, ' + playerName + '! We need your help!')
+    updateDescription('Welcome, ' + playerName + '! We need your help!');
 }
 
 //Display inventory function
 function displayInventory() {
     const statusBar = document.getElementById('statusbar');
-    document.getElementById('statusbar').textContent = '';
+    const inventoryContainer = document.createElement('div');
+    inventoryContainer.classList.add('inventory-container');
+    const itemCounts = {};
     inventory.forEach(item => {
-        const itemElement = document.createElement('p');
-        itemElement.textContent = item;
-        statusBar.appendChild(itemElement);
+        itemCounts[item] = (itemCounts[item] || 0) + 1;
     });
-}
+    for (const item in itemCounts) {
+        const itemElement = document.createElement('p');
+        itemElement.textContent = `${item}: ${itemCounts[item]}`;
+        inventoryContainer.appendChild(itemElement);
+    }
 
-//Close bag function
-function closeBag() {
-    const statusBar = document.getElementById("statusbar");
-    statusBar.textContent = ''; // Clear the status bar
-    updateStatus(); // Update the status (health and gold)
-    document.getElementById('bagbtn').textContent = "Bag"; // Set button text to "Bag"
-    document.getElementById('bagbtn').onclick = openBag; // Set button onclick to openBag
+    statusBar.appendChild(inventoryContainer);
 }
+  //Close bag function
+  function closeBag() {
+    const statusBar = document.getElementById('statusbar');
+    statusBar.innerHTML = '<p>Health: <span id="health">100</span></p><p>Gold: <span id="gold">50</span></p><button id="bagbtn" onclick="openBag()">Bag</button>';
+    updateDescription("You closed your bag." + previousDescription);
+    
+  }
+ 
 //Open bag function
 function openBag() {
-        updateDescription("You open your bag and take a peek inside.");
-        displayInventory();
-        const bagButton = document.getElementById('bagbtn');
-        bagButton.textContent = "Close Bag"; // Set button text to "Close Bag"
-        bagButton.onclick = closeBag; // Set button onclick to closeBag
-    }
+    previousDescription = currentDescription;
+    updateDescription("You open your bag and take a peek inside.");
+    displayInventory();
+    
+    const closeButton = document.getElementById('bagbtn');
+    closeButton.textContent = "Close bag";
+    closeButton.onclick = closeBag;
+}
+  
     
 //Update initial status
 updateStatus();
